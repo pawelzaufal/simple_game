@@ -1,0 +1,2 @@
+import Spells_And_Weapons
+print(Spells_And_Weapons.game_spells)
