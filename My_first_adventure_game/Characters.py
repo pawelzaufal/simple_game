@@ -278,7 +278,7 @@ def fight(hero, enemy):
             else:
                 continue
 
-# Stworzenie bohatera i roboczy main->game do testowania funkcji postaci, walk, budynków przed przeniesi
+# Stworzenie bohatera i roboczy main->game do testowania funkcji postaci, walk, budynków przed przeniesieniem do osobnych plików
 
 
 def make_a_hero():
@@ -296,7 +296,7 @@ def charlatan(hero):
                 healing = [0, 5, 10]
                 effect = random.choice(healing)
                 hero.get_life(effect)
-                print(f"The wind still blows where it wants to...\nToday we could restore {effect} of your life points\n{exit_place}")
+                print(f"The wind still blows where it wants to...\nToday we could restore {effect} of your life points\nYou heve {hero.life} life points now\n{exit_place}")
             else:
                 return print(not_enought_gold)
         if heal == "2":
@@ -307,7 +307,7 @@ def charlatan(hero):
                 healing = [0, half, full]
                 effect = random.choice(healing)
                 hero.get_life(effect)
-                print(f"The wind still blows where it wants to...\nToday we could restore {effect} of your life points\n{exit_place}")
+                print(f"The wind still blows where it wants to...\nToday we could restore {effect} of your life points\nYou have {hero.life} life points now\n{hero.total_life} is the limit of life points for you at the moment\n{exit_place}")
             else:
                 return print(not_enought_gold)
     else:
@@ -335,17 +335,56 @@ def market(hero):
             hero.buy_equipment(today, price)
     print(exit_place)
 
+def witch(hero):
+    question = input(f"I can see...\nyou\nyour\nwho are you?\n ")
+    if question == hero.name:
+        print("UUHH\nyes\nnow I can see\nyes\nclearly\nyes")
+        print("\nMay the Python be with you...\n")
+        question = input("Would you like to show me what you got?\n(Yes/No)\n ")
+        if question == "Yes":
+            counter = 0
+            for equipment in hero.equipment:
+                if equipment.Type == art:
+                    counter += 1
+            if counter >= 2:
+                print("Some interesting stones you got")
+                question = input("I can try to combine them\nbut it is an ancient art\nof mystrrious legendary\nrecipes of the witches\nfor you only for 50 gold\nAre we cooking or not?\n(Yes/No)\n ")
+                if question == "Yes":
+                    if hero.gold >= 50:
+                        hero.get_gold(-50)
+                        counter = 0
+                        equipments_list = []
+                        for equipment in hero.equipment:
+                            if equipment.Type == art:
+                                counter += 1
+                                equipments_list.append((counter, equipment))
+                                print(counter, equipment.Name)
+                        first_ingredient = input("Choose the number of first ingredient -> ")
 
+                        second_ingredient = input("Choose the number of second ingredient -> ")
+               # TO DO:
+            #Po wyborze dwóch składników są one usuwane z ekwipunku bohatera i będzie on w zamian otrzymywał losowy bonus: życie, mane, zaklęcie, przedmiot, złoto
+
+
+
+
+
+
+
+
+    pass
 
 
 def bazaar(hero):
     while True:
-        question = input("Where would you like to go?\n1.'Bazaar Care Center'\n2.'Bazaar Market Center'\n3.leave bazzar ")
+        question = input("Where would you like to go to?\n1.'Bazaar Care Center'\n2.'Bazaar Market Center'\n3.'The Witch'\n4.leave bazzar ")
         if question == "1":
             charlatan(hero)
         if question == "2":
             market(hero)
         if question == "3":
+            witch(hero)
+        if question == "4":
             print(exit_place)
             break
 
@@ -358,8 +397,12 @@ def bazaar(hero):
 def game():
      hero = make_a_hero()
      hero.get_equipment(sword)
+     hero.get_equipment(ruby_stone)
+     hero.get_equipment(sapphire_stone)
      print(hero.equipment_check())
      print(hero.equipment)
+     hero.get_gold(300)
+     print(hero.gold)
      print(f"You have {hero.life} life\n{hero.attack} attack points\n{hero.manapoll} mana")
      norman = Warrior("Norman", 10, 10)
      print("There is Norman the warrior on your way")
