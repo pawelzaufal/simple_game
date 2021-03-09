@@ -1,4 +1,3 @@
-# charakterystyka postaci, bohaterów
 
 import random
 import Spells_And_Weapons
@@ -17,6 +16,8 @@ no_equipment = "You have no equipment"
 knight_not_allowed = "Knight can not buy a magical equipment..."
 mage_not_allowed = "Mage can not buy weapon..."
 exit_place = "Good Bye stranger! May the Python by with you..."
+
+# charakterystyka postaci, bohaterów
 
 class Hero:
 
@@ -131,6 +132,7 @@ class Hero:
             self.damage = self.damage + equipment.Damage
         self.damage = self.damage + self.attack
 
+
 class Knight(Hero):
     def __init__(self, name):
         super().__init__(name)
@@ -147,6 +149,7 @@ class Knight(Hero):
             self.equipment.append(equipment)
         else:
             return print(knight_not_allowed)
+
 
 class Mage(Hero):
     def __init__(self, name):
@@ -165,6 +168,7 @@ class Mage(Hero):
             self.equipment.append(equipment)
         else:
             return print(mage_not_allowed)
+
 
 class Enemy:
     def __init__(self, name, attack, life):
@@ -192,6 +196,7 @@ class Enemy:
         else:
             return gold
 
+
 class Warrior(Enemy):
     def __init__(self, name, attack, life):
         super().__init__(name, attack, life)
@@ -199,6 +204,7 @@ class Warrior(Enemy):
         self.armor = 10
         self.gold = 10
         self.equipment = [sword, shield, stone, stone, stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone]
+
 
 class Ogr(Enemy):
     def __init__(self, name, attack, life):
@@ -208,6 +214,7 @@ class Ogr(Enemy):
         self.gold = 50
         self.equipment = [axe, stone, stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone, golden_stone, silver_stone, emerald_stone]
 
+
 class Skeleton(Enemy):
     def __init__(self, name, attack, life):
         super().__init__(name, attack, life)
@@ -215,6 +222,7 @@ class Skeleton(Enemy):
         self.armor = 5
         self.gold = 5
         self.equipment = [sword, armour, stone, stone, stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone]
+
 
 class Dragon(Enemy):
     def __init__(self, name, attack, life):
@@ -225,7 +233,7 @@ class Dragon(Enemy):
         self.equipment = [wand, mage_robe, emerald_stone, sapphire_stone, ruby_stone, diamond_stone, crystal_stone]
 
 
-
+# Mechanika walki:
 
 def fight(hero, enemy):
     while True:
@@ -269,6 +277,9 @@ def fight(hero, enemy):
                 break
             else:
                 continue
+
+# Stworzenie bohatera i roboczy main->game do testowania funkcji postaci, walk, budynków przed przeniesi
+
 
 def make_a_hero():
     name = input("What is your name? ")
