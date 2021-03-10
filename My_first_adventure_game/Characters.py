@@ -359,9 +359,147 @@ def witch(hero):
                                 counter += 1
                                 equipments_list.append((counter, equipment))
                                 print(counter, equipment.Name)
+                        print(equipments_list)
                         first_ingredient = input("Choose the number of first ingredient -> ")
+                        second_ingredient = input("Choose another -> ")
+                        stones_price = 0
+                        for equipment in equipments_list:
+                            if first_ingredient == equipment[0] or second_ingredient == equipment[0]:
+                                stones_price += equipment[1].Price
+                                hero.sell_equipment(equipment[1], 0)
+                        if stones_price < 100:
+                            witch_menu = ["gold", "life", "mana", "attack", "armor", "damage"]
+                            the_dish = random.choice(witch_menu)
+                            if the_dish == "gold":
+                                hero.get_gold(100)
+                                print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "life":
+                                hero.total_life = hero.total_life + 10
+                                hero.get_life(10)
+                                print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "mana":
+                                hero.max_mana = hero.max_mana + 10
+                                hero.fill_mana(10)
+                                print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "attack":
+                                hero.attack = hero.attack + 5
+                                print(f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "armor":
+                                hero.armor = hero.armor + 5
+                                print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "damage":
+                                hero.damage = hero.damage + 5
+                                print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
+                        elif 100 <= stones_price < 300:
+                            witch_menu = ["gold", "life", "mana", "attack", "damage", "armor", "equimpent"]
+                            equipments_list = [sword, shield]
+                            the_dish = random.choice(witch_menu)
+                            if the_dish == "gold":
+                                hero.get_gold(300)
+                                print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "life":
+                                hero.total_life = hero.total_life + 30
+                                hero.get_life(30)
+                                print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "mana":
+                                hero.max_mana = hero.max_mana + 30
+                                hero.fill_mana(30)
+                                print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "attack":
+                                hero.attack = hero.attack + 10
+                                print(f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "armor":
+                                hero.armor = hero.armor + 10
+                                print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "damage":
+                                hero.damage = hero.damage + 10
+                                print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "equipment":
+                                reward = random.choice(equipments_list)
+                                hero.get_equipment(reward)
+                                print(f"The wind still blows where it wants to\nYou have {reward.Name} in your {the_dish} now\nthanks to my cooking ablities")
+                        elif 300 <= stones_price < 500:
+                            witch_menu = ["gold", "life", "mana", "attack", "damage", "armor", "equimpent", "spell"]
+                            equipments_list = [sword, axe, shield, wand]
+                            spells_list = [icebolt, blessing]
+                            the_dish = random.choice(witch_menu)
+                            if the_dish == "gold":
+                                hero.get_gold(500)
+                                print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "life":
+                                hero.total_life = hero.total_life + 50
+                                hero.get_life(50)
+                                print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "mana":
+                                hero.max_mana = hero.max_mana + 50
+                                hero.fill_mana(50)
+                                print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "attack":
+                                hero.attack = hero.attack + 20
+                                print(f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "armor":
+                                hero.armor = hero.armor + 20
+                                print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "damage":
+                                hero.damage = hero.damage + 20
+                                print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "equipment":
+                                reward = random.choice(equipments_list)
+                                hero.get_equipment(reward)
+                                print(f"The wind still blows where it wants to\nYou have {reward.Name} in your {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "spell":
+                                reward = random.choice(spells_list)
+                                hero.learn_a_spell(reward)
+                                print(f"The wind still blows where it wants to\nYou have {reward.Name} in your spellbook now\nthanks to my cooking ablities")
+                        elif stones_price >= 500:
+                            witch_menu = ["gold", "life", "mana", "attack", "damage", "armor", "equimpent", "spell"]
+                            equipments_list = [sword, axe, shield, armour, wand, mage_robe]
+                            spells_list = [fireball, icebolt, blessing]
+                            the_dish = random.choice(witch_menu)
+                            if the_dish == "gold":
+                                hero.get_gold(1000)
+                                print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "life":
+                                hero.total_life = hero.total_life + 100
+                                hero.get_life(100)
+                                print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "mana":
+                                hero.max_mana = hero.max_mana + 100
+                                hero.fill_mana(100)
+                                print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "attack":
+                                hero.attack = hero.attack + 30
+                                print(
+                                    f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "armor":
+                                hero.armor = hero.armor + 30
+                                print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "damage":
+                                hero.damage = hero.damage + 30
+                                print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "equipment":
+                                reward = random.choice(equipments_list)
+                                hero.get_equipment(reward)
+                                print(f"The wind still blows where it wants to\nYou have {reward.Name} in your {the_dish} now\nthanks to my cooking ablities")
+                            elif the_dish == "spell":
+                                reward = random.choice(spells_list)
+                                hero.learn_a_spell(reward)
+                                print(f"The wind still blows where it wants to\nYou have {reward.Name} in your spellbook now\nthanks to my cooking ablities")
+                    else:
+                        print(not_enought_gold)
+        return print(f"The wind still blows where it wants to...\n{exit_place}")
+    else:
+        return print("...", exit_place)
 
-                        second_ingredient = input("Choose the number of second ingredient -> ")
+
+
+
+
+
+
+
+
+
                # TO DO:
             #Po wyborze dwóch składników są one usuwane z ekwipunku bohatera i będzie on w zamian otrzymywał losowy bonus: życie, mane, zaklęcie, przedmiot, złoto
 
