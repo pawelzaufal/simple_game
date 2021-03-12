@@ -6,7 +6,7 @@ sword, axe, shield, armour, wand, mage_robe, stone, bronze_stone, golden_stone, 
 burn, freeze, restore = Spells_And_Weapons.spells_effects
 o_h, t_h, carry, f_w, d_w, w, m_w, art, sell, reduce1, reduce2 = Spells_And_Weapons.equipment_atributes
 
-#komunikaty statystyk i umiejętności:
+# description for common statements:
 
 empty_mana = "You have not enough mana in your manapool..."
 full_mana = "You have already full manapool..."
@@ -17,7 +17,7 @@ knight_not_allowed = "Knight can not buy a magical equipment..."
 mage_not_allowed = "Mage can not buy weapon..."
 exit_place = "Good Bye stranger! May the Python by with you..."
 
-# charakterystyka postaci, bohaterów
+# Main character to play with and all his operations
 
 class Hero:
 
@@ -169,6 +169,7 @@ class Mage(Hero):
         else:
             return print(mage_not_allowed)
 
+# Enemies, their operations, stats, reward
 
 class Enemy:
     def __init__(self, name, attack, life):
@@ -233,7 +234,7 @@ class Dragon(Enemy):
         self.equipment = [wand, mage_robe, emerald_stone, sapphire_stone, ruby_stone, diamond_stone, crystal_stone]
 
 
-# Mechanika walki:
+# The fight mechanics (for now):
 
 def fight(hero, enemy):
     while True:
@@ -278,258 +279,20 @@ def fight(hero, enemy):
             else:
                 continue
 
-# Stworzenie bohatera i roboczy main->game do testowania funkcji postaci, walk, budynków przed przeniesieniem do osobnych plików
+# TO DO:
+            #how to waisly change buildings into classes, the same with spells and equipments,
+            #class for places in general and then on this class raise buildings
+            #places -> lairs, labirynths, castles
+            # mayby class land, for mountains, swamps, fields, see, forests, for different places and enemys and rewards
+            # main goal of the game -> the boss?, collect stones?, earn 1mln gold?, become a king, super hero?
+
+# Making a hero for testing and sample main->game function, to simulate how things are working
 
 
 def make_a_hero():
     name = input("What is your name? ")
     name = Hero(name)
     return name
-
-def charlatan(hero):
-    question = input(f"Welcome to\n'Bazaar Care Center'\nYou can restore your life\nWhether you agree\nto take full responsibility\nfor undesirable effects\nof our care\n(Yes/No)\n-> ")
-    if question == "Yes":
-        heal = input(f"1.Restoration of 10 life points costs 20gold\n2.Full life points restoration costs 100gold\n(1/2)\n-> ")
-        if heal == "1":
-            if hero.gold >= 20:
-                hero.get_gold(-20)
-                healing = [0, 5, 10]
-                effect = random.choice(healing)
-                hero.get_life(effect)
-                print(f"The wind still blows where it wants to...\nToday we could restore {effect} of your life points\nYou heve {hero.life} life points now\n{exit_place}")
-            else:
-                return print(not_enought_gold)
-        if heal == "2":
-            if hero.gold >= 100:
-                hero.get_gold(-100)
-                full = hero.total_life - hero.life
-                half = (hero.total_life - hero.life) / 2
-                healing = [0, half, full]
-                effect = random.choice(healing)
-                hero.get_life(effect)
-                print(f"The wind still blows where it wants to...\nToday we could restore {effect} of your life points\nYou have {hero.life} life points now\n{hero.total_life} is the limit of life points for you at the moment\n{exit_place}")
-            else:
-                return print(not_enought_gold)
-    else:
-        return print(exit_place)
-
-def market(hero):
-    question = input(f"Welcom to our\n'Bazaar Market Center'\nDo you have any interesting things to sell?\n(Yes/No)\n-> ")
-    if question == "Yes":
-        if len(hero.equipment) > 0:
-            for equipment in hero.equipment:
-                if equipment.Type == art:
-                    price = equipment.Price - (equipment.Price / 5)
-                    sell = input(f"This is really nice\nbut a little damagedn\n{equipment.Name}\nwe can release you\nfrom carry this useless artifact\nfor {price} gold!\nand belive me\nthis is the best price\nthat you can get for it\nDo you agree?\n(Yes/No)\n-> ")
-                    if sell == "Yes":
-                        hero.sell_equipment(equipment, price)
-        else:
-            print(no_equipment)
-    question = input(f"You can also buy some weapons here\nDo you want anything?\n(Yes/No)\n-> ")
-    if question == "Yes":
-        assortment = [sword, axe, shield, armour, wand, mage_robe]
-        today = random.choice(assortment)
-        price = today.Price - (today.Price / random.randint(4, 9))
-        buy = input(f"Today we heve\n{today.Name}\nolny for {price} gold\nDo you want it?\n(Yes/No)\n-> ")
-        if buy == "Yes":
-            hero.buy_equipment(today, price)
-    print(exit_place)
-
-def witch(hero):
-    question = input(f"I can see...\nyou\nyour\nwho are you?\n ")
-    if question == hero.name:
-        print("UUHH\nyes\nnow I can see\nyes\nclearly\nyes")
-        print("\nMay the Python be with you...\n")
-        question = input("Would you like to show me what you got?\n(Yes/No)\n ")
-        if question == "Yes":
-            counter = 0
-            for equipment in hero.equipment:
-                if equipment.Type == art:
-                    counter += 1
-            if counter >= 2:
-                print("Some interesting stones you got")
-                question = input("I can try to combine them\nbut it is an ancient art\nof mystrrious legendary\nrecipes of the witches\nfor you only for 50 gold\nAre we cooking or not?\n(Yes/No)\n ")
-                if question == "Yes":
-                    if hero.gold >= 50:
-                        hero.get_gold(-50)
-                        counter = 0
-                        equipments_list = []
-                        for equipment in hero.equipment:
-                            if equipment.Type == art:
-                                counter += 1
-                                equipments_list.append((counter, equipment))
-                                print(counter, equipment.Name)
-                        print(equipments_list)
-                        first_ingredient = input("Choose the number of first ingredient -> ")
-                        second_ingredient = input("Choose another -> ")
-                        stones_price = 0
-                        for equipment in equipments_list:
-                            if first_ingredient == equipment[0] or second_ingredient == equipment[0]:
-                                stones_price += equipment[1].Price
-                                hero.sell_equipment(equipment[1], 0)
-                        if stones_price < 100:
-                            witch_menu = ["gold", "life", "mana", "attack", "armor", "damage"]
-                            the_dish = random.choice(witch_menu)
-                            if the_dish == "gold":
-                                hero.get_gold(100)
-                                print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "life":
-                                hero.total_life = hero.total_life + 10
-                                hero.get_life(10)
-                                print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "mana":
-                                hero.max_mana = hero.max_mana + 10
-                                hero.fill_mana(10)
-                                print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "attack":
-                                hero.attack = hero.attack + 5
-                                print(f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "armor":
-                                hero.armor = hero.armor + 5
-                                print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "damage":
-                                hero.damage = hero.damage + 5
-                                print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
-                        elif 100 <= stones_price < 300:
-                            witch_menu = ["gold", "life", "mana", "attack", "damage", "armor", "equimpent"]
-                            equipments_list = [sword, shield]
-                            the_dish = random.choice(witch_menu)
-                            if the_dish == "gold":
-                                hero.get_gold(300)
-                                print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "life":
-                                hero.total_life = hero.total_life + 30
-                                hero.get_life(30)
-                                print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "mana":
-                                hero.max_mana = hero.max_mana + 30
-                                hero.fill_mana(30)
-                                print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "attack":
-                                hero.attack = hero.attack + 10
-                                print(f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "armor":
-                                hero.armor = hero.armor + 10
-                                print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "damage":
-                                hero.damage = hero.damage + 10
-                                print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "equipment":
-                                reward = random.choice(equipments_list)
-                                hero.get_equipment(reward)
-                                print(f"The wind still blows where it wants to\nYou have {reward.Name} in your {the_dish} now\nthanks to my cooking ablities")
-                        elif 300 <= stones_price < 500:
-                            witch_menu = ["gold", "life", "mana", "attack", "damage", "armor", "equimpent", "spell"]
-                            equipments_list = [sword, axe, shield, wand]
-                            spells_list = [icebolt, blessing]
-                            the_dish = random.choice(witch_menu)
-                            if the_dish == "gold":
-                                hero.get_gold(500)
-                                print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "life":
-                                hero.total_life = hero.total_life + 50
-                                hero.get_life(50)
-                                print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "mana":
-                                hero.max_mana = hero.max_mana + 50
-                                hero.fill_mana(50)
-                                print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "attack":
-                                hero.attack = hero.attack + 20
-                                print(f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "armor":
-                                hero.armor = hero.armor + 20
-                                print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "damage":
-                                hero.damage = hero.damage + 20
-                                print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "equipment":
-                                reward = random.choice(equipments_list)
-                                hero.get_equipment(reward)
-                                print(f"The wind still blows where it wants to\nYou have {reward.Name} in your {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "spell":
-                                reward = random.choice(spells_list)
-                                hero.learn_a_spell(reward)
-                                print(f"The wind still blows where it wants to\nYou have {reward.Name} in your spellbook now\nthanks to my cooking ablities")
-                        elif stones_price >= 500:
-                            witch_menu = ["gold", "life", "mana", "attack", "damage", "armor", "equimpent", "spell"]
-                            equipments_list = [sword, axe, shield, armour, wand, mage_robe]
-                            spells_list = [fireball, icebolt, blessing]
-                            the_dish = random.choice(witch_menu)
-                            if the_dish == "gold":
-                                hero.get_gold(1000)
-                                print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "life":
-                                hero.total_life = hero.total_life + 100
-                                hero.get_life(100)
-                                print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "mana":
-                                hero.max_mana = hero.max_mana + 100
-                                hero.fill_mana(100)
-                                print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "attack":
-                                hero.attack = hero.attack + 30
-                                print(
-                                    f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "armor":
-                                hero.armor = hero.armor + 30
-                                print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "damage":
-                                hero.damage = hero.damage + 30
-                                print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "equipment":
-                                reward = random.choice(equipments_list)
-                                hero.get_equipment(reward)
-                                print(f"The wind still blows where it wants to\nYou have {reward.Name} in your {the_dish} now\nthanks to my cooking ablities")
-                            elif the_dish == "spell":
-                                reward = random.choice(spells_list)
-                                hero.learn_a_spell(reward)
-                                print(f"The wind still blows where it wants to\nYou have {reward.Name} in your spellbook now\nthanks to my cooking ablities")
-                    else:
-                        print(not_enought_gold)
-        return print(f"The wind still blows where it wants to...\n{exit_place}")
-    else:
-        return print("...", exit_place)
-
-
-
-
-
-
-
-
-
-
-               # TO DO:
-            #Po wyborze dwóch składników są one usuwane z ekwipunku bohatera i będzie on w zamian otrzymywał losowy bonus: życie, mane, zaklęcie, przedmiot, złoto
-
-
-
-
-
-
-
-
-    pass
-
-
-def bazaar(hero):
-    while True:
-        question = input("Where would you like to go to?\n1.'Bazaar Care Center'\n2.'Bazaar Market Center'\n3.'The Witch'\n4.leave bazzar ")
-        if question == "1":
-            charlatan(hero)
-        if question == "2":
-            market(hero)
-        if question == "3":
-            witch(hero)
-        if question == "4":
-            print(exit_place)
-            break
-
-
-
-
-
 
 
 def game():

@@ -1,6 +1,9 @@
 import collections
 
-# Opis zaklęć
+
+# Spells description:
+
+
 Spell = collections.namedtuple('Spell', ['Name', 'Mana', 'Damage', 'Effect', 'Price'])
 
 burn = "burn"
@@ -14,7 +17,11 @@ icebolt = Spell("icebolt", 5, 5, freeze, 150)
 blessing = Spell("blessing", 5, 0, restore, 100)
 
 game_spells = (fireball, icebolt, blessing)
-# Opis ekwipunku
+
+
+# Equipment description:
+
+
 Equipment = collections.namedtuple('Equipment', ['Name', 'Type', 'Damage', 'Armor', 'Placement', 'Effect', 'Price'])
 
 o_h = "one-handed equipment"
