@@ -1,11 +1,12 @@
 
-
+import random
 import Spells_And_Weapons
 fireball, icebolt, blessing = Spells_And_Weapons.game_spells
 sword, axe, shield, armour, wand, mage_robe, stone, bronze_stone, golden_stone, silver_stone, crystal_stone, ruby_stone, emerald_stone, sapphire_stone, diamond_stone = Spells_And_Weapons.game_equipment
 burn, freeze, restore = Spells_And_Weapons.spells_effects
 o_h, t_h, carry, f_w, d_w, w, m_w, art, sell, reduce1, reduce2 = Spells_And_Weapons.equipment_atributes
 import Characters
+empty_mana, full_mana, not_enought_gold, full_life, no_equipment, knight_not_allowed, mage_not_allowed, exit_place = Characters.status_list
 
 #Buildings descriptnig functions:
 

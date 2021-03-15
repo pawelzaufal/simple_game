@@ -17,6 +17,8 @@ knight_not_allowed = "Knight can not buy a magical equipment..."
 mage_not_allowed = "Mage can not buy weapon..."
 exit_place = "Good Bye stranger! May the Python by with you..."
 
+status_list = [empty_mana, full_mana, not_enought_gold, full_life, no_equipment, knight_not_allowed, mage_not_allowed, exit_place]
+
 # Main character to play with and all his operations
 
 class Hero:
@@ -312,7 +314,7 @@ def game():
          fight(hero, norman)
      guild = input("Do you want to go to bazaar? (Yes/No) ")
      if guild == "Yes":
-         bazaar(hero)
+        pass
      print(hero.gold)
 
      pass
