@@ -281,44 +281,7 @@ def fight(hero, enemy):
             else:
                 continue
 
-# TO DO:
-            #how to waisly change buildings into classes, the same with spells and equipments,
-            #class for places in general and then on this class raise buildings
-            #places -> lairs, labirynths, castles
-            # mayby class land, for mountains, swamps, fields, see, forests, for different places and enemys and rewards
-            # main goal of the game -> the boss?, collect stones?, earn 1mln gold?, become a king, super hero?
 
-# Making a hero for testing and sample main->game function, to simulate how things are working
-
-
-def make_a_hero():
-    name = input("What is your name? ")
-    name = Hero(name)
-    return name
-
-
-def game():
-     hero = make_a_hero()
-     hero.get_equipment(sword)
-     hero.get_equipment(ruby_stone)
-     hero.get_equipment(sapphire_stone)
-     print(hero.equipment_check())
-     print(hero.equipment)
-     hero.get_gold(300)
-     print(hero.gold)
-     print(f"You have {hero.life} life\n{hero.attack} attack points\n{hero.manapoll} mana")
-     norman = Warrior("Norman", 10, 10)
-     print("There is Norman the warrior on your way")
-     fight_decision = input("Do you fight? (Yes/No) ")
-     if fight_decision == "Yes":
-         fight(hero, norman)
-     guild = input("Do you want to go to bazaar? (Yes/No) ")
-     if guild == "Yes":
-        pass
-     print(hero.gold)
-
-     pass
-game()
 
 
 

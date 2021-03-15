@@ -312,3 +312,9 @@ def bazaar(hero):
         if question == "4":
             print(exit_place)
             break
+
+
+if __name__ == '__main__':
+    magic_guild()
+    blcksmiths_workshop()
+    bazaar()
