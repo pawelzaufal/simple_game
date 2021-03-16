@@ -117,7 +117,7 @@ class Hero:
                 cost = spell.Mana - (spell.Mana / 2)
                 damage = spell.Damage + (spell.Damage / 2)
 
-        if  self.manapoll >= cost:
+        if self.manapoll >= cost:
             self.manapoll = self.manapoll - cost
             self.damage = self.damage + damage
             if spell.Effect == burn:
@@ -182,11 +182,16 @@ class Enemy:
         self.armor = 0
         self.gold = 0
         self.equipment = []
+        self.spellbook = []
+
 
     def loose_life(self, life):
         self.life = self.life - life
 
     def fight(self):
+        if len(self.spellbook) > 0:
+            spell = random.choice(self.spellbook)
+            self.damage = self.damage + spell.Damage
         for equipment in self.equipment:
              self.damage = self.damage + equipment.Damage
         self.damage = self.damage + self.attack
@@ -227,6 +232,16 @@ class Skeleton(Enemy):
         self.equipment = [sword, armour, stone, stone, stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone]
 
 
+class Wizard(Enemy):
+    def __init__(self, name, attack, life):
+        super().__init__(name, attack, life)
+        self.damage = 15
+        self.armor = 10
+        self.gold = 30
+        self.equipment = [wand, bronze_stone, bronze_stone, bronze_stone, bronze_stone, bronze_stone, golden_stone, golden_stone, silver_stone, silver_stone]
+        self.spellbook = [icebolt]
+
+
 class Dragon(Enemy):
     def __init__(self, name, attack, life):
         super().__init__(name, attack, life)
@@ -234,6 +249,7 @@ class Dragon(Enemy):
         self.armor = 20
         self.gold = 100
         self.equipment = [wand, mage_robe, emerald_stone, sapphire_stone, ruby_stone, diamond_stone, crystal_stone]
+        self.spellbook = [fireball]
 
 
 # The fight mechanics (for now):
