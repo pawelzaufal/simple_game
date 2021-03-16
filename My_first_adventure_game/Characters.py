@@ -252,50 +252,7 @@ class Dragon(Enemy):
         self.spellbook = [fireball]
 
 
-# The fight mechanics (for now):
 
-def fight(hero, enemy):
-    while True:
-        if len(hero.spellbook) > 0 and hero.cast_a_spell(fireball) != empty_mana and hero.cast_a_spell(icebolt) != empty_mana and hero.cast_a_spell(blessing) != empty_mana:
-            magic = input("Do you want to use a spell? (Yes/No) -> ")
-            if magic == "Yes":
-                spell = input(f"Choose a spell from your spellbook: ({hero.spellbook_check()} -> ")
-                if spell == "fireball":
-                    hero.cast_a_spell(fireball)
-                    print(f"You have {hero.manapoll} mana in your manapool.")
-                elif spell == "icebolt":
-                    hero.cast_a_spell(icebolt)
-                    print(f"You have {hero.manapoll} mana in your manapool.")
-                elif spell == "blessing":
-                    hero.cast_a_spell(blessing)
-                    print(f"You have {hero.manapoll} mana in your manapool.")
-            else:
-                break
-        else:
-            break
-    hero.fight()
-    while True:
-        if hero.damage >= enemy.life:
-            if len(enemy.defeated()) > 1:
-                gold, equipment = enemy.defeated()
-                hero.get_gold(gold)
-                hero.get_equipment(equipment)
-                print(f"You win, and find {gold} gold and {equipment.Name}\nyour total gold now is {hero.gold}\nand you have {hero.equipment_check()}\nyour life after fight is {hero.life}")
-
-            else:
-                gold = enemy.defeated()
-                hero.get_gold(gold)
-                print(f"You win, and find {gold} gold\nyour total gold now is {hero.gold}\nnyour life after fight is {hero.life}")
-            break
-        elif hero.damage < enemy.life:
-            enemy.loose_life(hero.damage)
-            enemy.fight()
-            hero.loose_life(enemy.damage)
-            if hero.life <= 0:
-                print(f"Game Over")
-                break
-            else:
-                continue
 
 
 
