@@ -20,6 +20,7 @@ class Land:
     def tawern(self, hero):
 
 
+
         pass
 
     # The fight mechanics (for now):
@@ -27,8 +28,7 @@ class Land:
     @staticmethod
     def fight(hero, enemy):
         while True:
-            if len(hero.spellbook) > 0 and hero.cast_a_spell(fireball) != empty_mana and hero.cast_a_spell(
-                    icebolt) != empty_mana and hero.cast_a_spell(blessing) != empty_mana:
+            if len(hero.spellbook) > 0 and hero.cast_a_spell(fireball) != empty_mana and hero.cast_a_spell(icebolt) != empty_mana and hero.cast_a_spell(blessing) != empty_mana:
                 magic = input("Do you want to use a spell? (Yes/No) -> ")
                 if magic == "Yes":
                     spell = input(f"Choose a spell from your spellbook: ({hero.spellbook_check()} -> ")
