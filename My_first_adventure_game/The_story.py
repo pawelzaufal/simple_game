@@ -8,7 +8,7 @@ o_h, t_h, carry, f_w, d_w, w, m_w, art, sell, reduce1, reduce2 = Spells_And_Weap
 import Characters
 empty_mana, full_mana, not_enought_gold, full_life, no_equipment, knight_not_allowed, mage_not_allowed, exit_place = Characters.status_list
 import Buildings
-
+import Lands
 
 
 # TO DO:
@@ -40,8 +40,9 @@ def game():
      norman = Characters.Warrior("Norman", 10, 10)
      print("There is Norman the warrior on your way")
      fight_decision = input("Do you fight? (Yes/No) ")
+     town = Lands.Land("Town")
      if fight_decision == "Yes":
-         Characters.fight(hero, norman)
+         town.fight(hero, norman)
      guild = input("Do you want to go to bazaar? (Yes/No) ")
      if guild == "Yes":
         Buildings.bazaar(hero)

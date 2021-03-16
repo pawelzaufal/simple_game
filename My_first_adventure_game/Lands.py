@@ -11,14 +11,16 @@ empty_mana, full_mana, not_enought_gold, full_life, no_equipment, knight_not_all
 
 class Land:
 
-    def __init__(self, name, boss, gold, hero):
+    def __init__(self, name):
         self.name = name
-        self.boss = boss
-        self.gold = gold
-        self.hero = hero
         self.enemies = []
         self.treasures = []
 
+
+    def tawern(self, hero):
+
+
+        pass
 
     # The fight mechanics (for now):
 
