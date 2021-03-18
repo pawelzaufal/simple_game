@@ -13,6 +13,7 @@ full_mana = "You have already full manapool..."
 not_enought_gold = "You have not enough gold..."
 full_life = "You can't get more life..."
 no_equipment = "You have no equipment"
+no_spells = "Your spellbook is empty..."
 knight_not_allowed = "Knight can not buy a magical equipment..."
 mage_not_allowed = "Mage can not buy weapon..."
 exit_place = "Good Bye stranger! May the Python by with you..."
@@ -40,7 +41,10 @@ class Hero:
         spells = []
         for spell in self.spellbook:
             spells.append(spell.Name)
-        return spells
+        if len(spells) == 0:
+            return no_spells
+        else:
+            return spells
 
     def attack_check(self):
         info_damage = self.damage

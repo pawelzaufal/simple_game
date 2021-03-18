@@ -18,6 +18,38 @@ class Land:
 
 
     def tawern(self, hero):
+        while True:
+            answear = input(f"""Welcom to little tawern in {self.name}!
+Take a look at our menu:
+1. Check your life points
+2. Check your mana points
+3. Check your equimpent
+4. Check your gold
+5. Check your attack
+6. Check your armor
+7. Check your spellbook
+8. Leave tavern
+Choose what you want!
+-> """)
+            if answear == "1":
+                print(f"You have {hero.life} of total {hero.total_life} life points")
+            elif answear == "2":
+                print(f"You have {hero.manapoll} of total {hero.max_mana} mana in your manapool")
+            elif answear == "3":
+                print(f"Take a look at your equipment:\n{hero.equipment_check()}")
+            elif answear == "4":
+                print(f"I can see you're pretty rich\nYou have {hero.gold} gold!")
+            elif answear == "5":
+                print(f"Your attack skills are impressive\nYou can attack with {hero.attack_check()} damge points")
+            elif answear == "6":
+                print(f"Strong defence!\nYou have {hero.armor} armor points")
+            elif answear == "7":
+                print(f"Take a look at your spellbook:\n{hero.spellbook_check()}")
+            elif answear == "8":
+                print(exit_place)
+                break
+
+
 
 
 

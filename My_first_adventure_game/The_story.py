@@ -43,9 +43,9 @@ def game():
      town = Lands.Land("Town")
      if fight_decision == "Yes":
          town.fight(hero, norman)
-     guild = input("Do you want to go to bazaar? (Yes/No) ")
+     guild = input("Do you want to go to tawern? (Yes/No) ")
      if guild == "Yes":
-        Buildings.bazaar(hero)
+        town.tawern(hero)
      print(hero.gold)
 
      pass
