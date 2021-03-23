@@ -101,6 +101,9 @@ class Hero:
     def learn_a_spell(self, spell):
         self.spellbook.append(spell)
 
+    def extend_manapool(self, mana):
+        self.manapoll = self.manapoll + mana
+
     def fill_mana(self, mana):
         if self.manapoll < self.max_mana:
             if self.manapoll + mana > self.max_mana:

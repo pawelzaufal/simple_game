@@ -40,7 +40,8 @@ class Settlement(Lands.Land):
         if question == "Yes":
             if hero.gold >= 200:
                 hero.gold = hero.gold - 200
-                hero.manapoll = hero.max_mana
+                mana = hero.max_mana - hero.manapool
+                return hero.fill_mana(mana)
             else:
                 return print(Characters.not_enought_gold)
         else:
