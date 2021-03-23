@@ -323,14 +323,15 @@ class Settlement(Lands.Land):
 
 
     def main_square(self, hero):
-        print(f"Hello {hero.name}!\nFeel welcome to rock this settlement")
+        print(f"Hello {hero.name}!\nFeel welcome to rock {self.name}")
         while True:
             place = input(f"""Which place would you like to visit?
 1. Tawern
 2. Bazaar
 3. Mage guild
 4. Blacksmith workshop
-5. Say 'goodbye' to {self.name}""")
+5. Say 'goodbye' to {self.name}
+""")
             if place == "1":
                 self.tawern(hero)
             elif place == "2":
