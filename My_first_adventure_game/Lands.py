@@ -18,8 +18,9 @@ class Land:
 
 
     def tawern(self, hero):
+        print(f"Welcom to little tawern in {self.name}!")
         while True:
-            answear = input(f"""Welcom to little tawern in {self.name}!
+            answear = input(f"""
 Take a look at our menu:
 1. Check your life points
 2. Check your mana points

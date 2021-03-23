@@ -7,7 +7,7 @@ o_h, t_h, carry, f_w, d_w, w, m_w, art, sell, reduce1, reduce2 = Spells_And_Weap
 
 import Characters
 empty_mana, full_mana, not_enought_gold, full_life, no_equipment, knight_not_allowed, mage_not_allowed, exit_place = Characters.status_list
-import Buildings
+import Settlement
 import Lands
 
 
