@@ -310,9 +310,9 @@ class Settlement(Lands.Land):
                                     print(f"The wind still blows where it wants to\nYou have {reward.Name} in your spellbook now\nthanks to my cooking ablities")
                         else:
                             print(not_enought_gold)
-            return print(f"The wind still blows where it wants to...\n{exit_place}")
+            print(f"The wind still blows where it wants to...\n{exit_place}")
         else:
-            return print("...", exit_place)
+            print("...", exit_place)
 
 
 
