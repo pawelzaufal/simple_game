@@ -8,7 +8,7 @@ o_h, t_h, carry, f_w, d_w, w, m_w, art, sell, reduce1, reduce2 = Spells_And_Weap
 import Characters
 empty_mana, full_mana, not_enought_gold, full_life, no_equipment, knight_not_allowed, mage_not_allowed, exit_place = Characters.status_list
 import Settlement
-import Lands
+
 
 
 # TO DO:
@@ -32,21 +32,14 @@ def game():
      hero.get_equipment(sword)
      hero.get_equipment(ruby_stone)
      hero.get_equipment(sapphire_stone)
-     print(hero.equipment_check())
-     print(hero.equipment)
      hero.get_gold(300)
-     print(hero.gold)
-     print(f"You have {hero.life} life\n{hero.attack} attack points\n{hero.manapoll} mana")
      norman = Characters.Warrior("Norman", 10, 10)
      print("There is Norman the warrior on your way")
      fight_decision = input("Do you fight? (Yes/No) ")
-     town = Lands.Land("Town")
+     town = Settlement.Settlement("Champignon Settlement")
      if fight_decision == "Yes":
          town.fight(hero, norman)
-     guild = input("Do you want to go to tawern? (Yes/No) ")
-     if guild == "Yes":
-        town.tawern(hero)
-     print(hero.gold)
+     town.main_square(hero)
 
      pass
 game()

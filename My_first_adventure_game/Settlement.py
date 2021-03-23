@@ -19,10 +19,10 @@ class Settlement(Lands.Land):
 
 #Methods for settlement buildings:
 
-# Magic Guild:
+# Mage Guild:
 
 
-    def buy_a_spell_in_magic_guild(self, hero):
+    def buy_a_spell_in_mage_guild(self, hero):
         print(f"You can buy a spell\nfireball for {fireball.Price} gold\nicebolt for {icebolt.Price} gold\nblessig for {blessing.Price} gold")
         question = input("Do you want to buy any of this spells? (Yes/No) -> ")
         if question == "Yes":
@@ -35,7 +35,7 @@ class Settlement(Lands.Land):
                 return hero.buy_a_spell(blessing, blessing.Price)
 
 
-    def refill_manapoll_in_magic_guild(self, hero):
+    def refill_manapoll_in_mage_guild(self, hero):
         question = input("Do you want to refill your manapool for 200 gold? (Yes/No) -> ")
         if question == "Yes":
             if hero.gold >= 200:
@@ -47,9 +47,9 @@ class Settlement(Lands.Land):
             return print(Characters.exit_place)
 
 
-    def magic_guild(self, hero):
-        buy_a_spell_in_magic_guild(hero)
-        refill_manapoll_in_magic_guild(hero)
+    def mage_guild(self, hero):
+        self.buy_a_spell_in_mage_guild(hero)
+        self.refill_manapoll_in_mage_guild(hero)
 
 
 # Blacksmiths workshop:
@@ -92,9 +92,9 @@ class Settlement(Lands.Land):
             return Characters.exit_place
 
 
-    def blcksmiths_workshop(self, hero):
-        buy_from_a_blacksmith(hero)
-        sell_to_the_blacksmith(hero)
+    def blacksmiths_workshop(self, hero):
+        self.buy_from_a_blacksmith(hero)
+        self.sell_to_the_blacksmith(hero)
 
 
 #Bazaar:
@@ -312,15 +312,37 @@ class Settlement(Lands.Land):
         while True:
             question = input("Where would you like to go to?\n1.'Bazaar Care Center'\n2.'Bazaar Market Center'\n3.'The Witch'\n4.leave bazzar ")
             if question == "1":
-                charlatan(hero)
+                self.charlatan(hero)
             if question == "2":
-                market(hero)
+                self.market(hero)
             if question == "3":
-                witch(hero)
+                self.witch(hero)
             if question == "4":
                 print(exit_place)
                 break
 
 
-if __name__ == '__main__':
-    pass
+    def main_square(self, hero):
+        print(f"Hello {hero.name}!\nFeel welcome to rock this settlement")
+        while True:
+            place = input(f"""Which place would you like to visit?
+1. Tawern
+2. Bazaar
+3. Mage guild
+4. Blacksmith workshop
+5. Say 'goodbye' to {self.name}""")
+            if place == "1":
+                self.tawern(hero)
+            elif place == "2":
+                self.bazaar(hero)
+            elif place == "3":
+                self.mage_guild(hero)
+            elif place == "4":
+                self.blacksmiths_workshop(hero)
+            elif place == "5":
+                print(exit_place)
+                break
+
+
+# if __name__ == '__main__':
+#     pass
