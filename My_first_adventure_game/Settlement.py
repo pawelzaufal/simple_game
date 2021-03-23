@@ -180,14 +180,17 @@ class Settlement(Lands.Land):
                                     counter += 1
                                     equipments_list.append((counter, equipment))
                                     print(counter, equipment.Name)
-                            print(equipments_list)
+
                             first_ingredient = input("Choose the number of first ingredient -> ")
                             second_ingredient = input("Choose another -> ")
                             stones_price = 0
-                            for equipment in equipments_list:
-                                if first_ingredient == equipment[0] or second_ingredient == equipment[0]:
-                                    stones_price += equipment[1].Price
-                                    hero.sell_equipment(equipment[1], 0)
+                            for ingredient in equipments_list:
+                                if first_ingredient == ingredient[0]:
+                                    stones_price += (ingredient[1]).Price
+                                    hero.sell_equipment((ingredient[1]), 0)
+                                elif second_ingredient == ingredient[0]:
+                                    stones_price += (ingredient[1]).Price
+                                    hero.sell_equipment((ingredient[1]), 0)
                             if stones_price < 100:
                                 witch_menu = ["gold", "life", "mana", "attack", "armor", "damage"]
                                 the_dish = random.choice(witch_menu)
