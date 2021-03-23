@@ -135,9 +135,13 @@ class Settlement(Lands.Land):
                 for equipment in hero.equipment:
                     if equipment.Type == art:
                         price = equipment.Price - (equipment.Price / 5)
-                        sell = input(f"This is really nice\nbut a little damagedn\n{equipment.Name}\nwe can release you\nfrom carry this useless artifact\nfor {price} gold!\nand belive me\nthis is the best price\nthat you can get for it\nDo you agree?\n(Yes/No)\n-> ")
+                        sell = input(f"This is really nice\nbut a little damaged\n{equipment.Name}\nwe can release you\nfrom carry this useless artifact\nfor {price} gold!\nand belive me\nthis is the best price\nthat you can get for it\nDo you agree?\n(Yes/No)\n-> ")
                         if sell == "Yes":
                             hero.sell_equipment(equipment, price)
+                            print(f"we will take care about {equipment.Name}\nHere is your {price} gold!")
+                        else:
+                            print("Oh, maybe next time...")
+
             else:
                 print(no_equipment)
         question = input(f"You can also buy some weapons here\nDo you want anything?\n(Yes/No)\n-> ")
@@ -148,6 +152,7 @@ class Settlement(Lands.Land):
             buy = input(f"Today we heve\n{today.Name}\nolny for {price} gold\nDo you want it?\n(Yes/No)\n-> ")
             if buy == "Yes":
                 hero.buy_equipment(today, price)
+                print(f"Take good care of {today.Name}")
         print(exit_place)
 
 
