@@ -7,15 +7,4 @@ class Forest(Lands.Land):
         super().__init__(name)
 
 
-
-
-
-
-
-
-
-
-
-settlement = Settlement("Champignon Settlement")
-
-print(settlement.name)
+# FOREST IN PROGRESS
