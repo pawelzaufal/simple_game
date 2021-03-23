@@ -107,22 +107,20 @@ class Settlement(Lands.Land):
             heal = input(f"1.Restoration of 10 life points costs 20gold\n2.Full life points restoration costs 100gold\n(1/2)\n-> ")
             if heal == "1":
                 if hero.gold >= 20:
-                    hero.get_gold(-20)
                     healing = [0, 5, 10]
                     effect = random.choice(healing)
-                    hero.get_life(effect)
                     print(f"The wind still blows where it wants to...\nToday we could restore {effect} of your life points\nYou heve {hero.life} life points now\n{exit_place}")
+                    return hero.get_gold(-20), hero.get_life(effect)
                 else:
                     return print(not_enought_gold)
             if heal == "2":
                 if hero.gold >= 100:
-                    hero.get_gold(-100)
                     full = hero.total_life - hero.life
                     half = (hero.total_life - hero.life) / 2
                     healing = [0, half, full]
                     effect = random.choice(healing)
-                    hero.get_life(effect)
                     print(f"The wind still blows where it wants to...\nToday we could restore {effect} of your life points\nYou have {hero.life} life points now\n{hero.total_life} is the limit of life points for you at the moment\n{exit_place}")
+                    return hero.get_gold(-100), hero.get_life(effect)
                 else:
                     return print(not_enought_gold)
         else:
@@ -140,6 +138,7 @@ class Settlement(Lands.Land):
                         if sell == "Yes":
                             hero.sell_equipment(equipment, price)
                             print(f"we will take care about {equipment.Name}\nHere is your {price} gold!")
+
                         else:
                             print("Oh, maybe next time...")
 
@@ -187,34 +186,42 @@ class Settlement(Lands.Land):
                             stones_price = 0
                             for ingredient in equipments_list:
                                 if first_ingredient == ingredient[0]:
-                                    stones_price += equipment.Price
-                                    hero.sell_equipment(equipment, 0)
+                                    first = ingredient[1]
+                                    stones_price += first.Price
+
                                 elif second_ingredient == ingredient[0]:
-                                    stones_price += equipment.Price
-                                    hero.sell_equipment(equipment, 0)
+                                    second = ingredient[1]
+                                    stones_price += second.Price
+
                             if stones_price < 100:
                                 witch_menu = ["gold", "life", "mana", "attack", "armor", "damage"]
                                 the_dish = random.choice(witch_menu)
                                 if the_dish == "gold":
                                     hero.get_gold(100)
                                     print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.get_gold(100)
                                 elif the_dish == "life":
                                     hero.total_life = hero.total_life + 10
                                     hero.get_life(10)
                                     print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.total_life, hero.get_life(10)
                                 elif the_dish == "mana":
                                     hero.max_mana = hero.max_mana + 10
-                                    hero.fill_mana(10)
-                                    print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
+
+                                    print(f"The wind still blows where it wants to\nYou have {hero.max_mana} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.max_mana, hero.fill_mana(10)
                                 elif the_dish == "attack":
                                     hero.attack = hero.attack + 5
                                     print(f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.attack
                                 elif the_dish == "armor":
                                     hero.armor = hero.armor + 5
                                     print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.armor
                                 elif the_dish == "damage":
                                     hero.damage = hero.damage + 5
                                     print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.damage
                             elif 100 <= stones_price < 300:
                                 witch_menu = ["gold", "life", "mana", "attack", "damage", "armor", "equimpent"]
                                 equipments_list = [sword, shield]
@@ -222,27 +229,33 @@ class Settlement(Lands.Land):
                                 if the_dish == "gold":
                                     hero.get_gold(300)
                                     print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.get_gold(300)
                                 elif the_dish == "life":
                                     hero.total_life = hero.total_life + 30
                                     hero.get_life(30)
                                     print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.total_life, hero.get_life(30)
                                 elif the_dish == "mana":
                                     hero.max_mana = hero.max_mana + 30
-                                    hero.fill_mana(30)
-                                    print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
+
+                                    print(f"The wind still blows where it wants to\nYou have {hero.max_mana} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.max_mana, hero.fill_mana(30)
                                 elif the_dish == "attack":
                                     hero.attack = hero.attack + 10
                                     print(f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.attack
                                 elif the_dish == "armor":
                                     hero.armor = hero.armor + 10
                                     print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.armor
                                 elif the_dish == "damage":
                                     hero.damage = hero.damage + 10
                                     print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.damage
                                 elif the_dish == "equipment":
                                     reward = random.choice(equipments_list)
-                                    hero.get_equipment(reward)
                                     print(f"The wind still blows where it wants to\nYou have {reward.Name} in your {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.get_equipment(reward)
                             elif 300 <= stones_price < 500:
                                 witch_menu = ["gold", "life", "mana", "attack", "damage", "armor", "equimpent", "spell"]
                                 equipments_list = [sword, axe, shield, wand]
@@ -251,31 +264,36 @@ class Settlement(Lands.Land):
                                 if the_dish == "gold":
                                     hero.get_gold(500)
                                     print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.get_gold(500)
                                 elif the_dish == "life":
                                     hero.total_life = hero.total_life + 50
                                     hero.get_life(50)
                                     print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.total_life, hero.get_life(50)
                                 elif the_dish == "mana":
                                     hero.max_mana = hero.max_mana + 50
-                                    hero.fill_mana(50)
-                                    print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
+                                    print(f"The wind still blows where it wants to\nYou have {hero.max_mana} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.max_mana,  hero.fill_mana(50)
                                 elif the_dish == "attack":
                                     hero.attack = hero.attack + 20
                                     print(f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.attack
                                 elif the_dish == "armor":
                                     hero.armor = hero.armor + 20
                                     print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.armor
                                 elif the_dish == "damage":
                                     hero.damage = hero.damage + 20
                                     print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.damage
                                 elif the_dish == "equipment":
                                     reward = random.choice(equipments_list)
-                                    hero.get_equipment(reward)
                                     print(f"The wind still blows where it wants to\nYou have {reward.Name} in your {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.get_equipment(reward)
                                 elif the_dish == "spell":
                                     reward = random.choice(spells_list)
-                                    hero.learn_a_spell(reward)
                                     print(f"The wind still blows where it wants to\nYou have {reward.Name} in your spellbook now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.learn_a_spell(reward)
                             elif stones_price >= 500:
                                 witch_menu = ["gold", "life", "mana", "attack", "damage", "armor", "equimpent", "spell"]
                                 equipments_list = [sword, axe, shield, armour, wand, mage_robe]
@@ -284,36 +302,42 @@ class Settlement(Lands.Land):
                                 if the_dish == "gold":
                                     hero.get_gold(1000)
                                     print(f"The wind still blows where it wants to\nYou have {hero.gold} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.get_gold(1000)
                                 elif the_dish == "life":
                                     hero.total_life = hero.total_life + 100
                                     hero.get_life(100)
                                     print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.total_life,)
                                 elif the_dish == "mana":
                                     hero.max_mana = hero.max_mana + 100
-                                    hero.fill_mana(100)
-                                    print(f"The wind still blows where it wants to\nYou have {hero.manapoll} {the_dish} now\nthanks to my cooking ablities")
+                                    print(f"The wind still blows where it wants to\nYou have {hero.max_mana} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.max_mana, hero.fill_mana(100)
                                 elif the_dish == "attack":
                                     hero.attack = hero.attack + 30
                                     print(f"The wind still blows where it wants to\nYou have {hero.attack} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.attack
                                 elif the_dish == "armor":
                                     hero.armor = hero.armor + 30
                                     print(f"The wind still blows where it wants to\nYou have {hero.armor} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.armor
                                 elif the_dish == "damage":
                                     hero.damage = hero.damage + 30
                                     print(f"The wind still blows where it wants to\nYou have {hero.damage} {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.damege
                                 elif the_dish == "equipment":
                                     reward = random.choice(equipments_list)
-                                    hero.get_equipment(reward)
                                     print(f"The wind still blows where it wants to\nYou have {reward.Name} in your {the_dish} now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.get_equipment(reward)
                                 elif the_dish == "spell":
                                     reward = random.choice(spells_list)
-                                    hero.learn_a_spell(reward)
                                     print(f"The wind still blows where it wants to\nYou have {reward.Name} in your spellbook now\nthanks to my cooking ablities")
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.learn_a_spell(reward)
                         else:
-                            print(not_enought_gold)
-            print(f"The wind still blows where it wants to...\n{exit_place}")
+                            return print(not_enought_gold)
+                else:
+                    return print(f"I need at least two ingredients...\nThe wind still blows where it wants to...\n{exit_place}")
         else:
-            print("...", exit_place)
+            return print("...", exit_place)
 
 
 
