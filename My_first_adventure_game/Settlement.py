@@ -307,7 +307,7 @@ class Settlement(Lands.Land):
                                     hero.total_life = hero.total_life + 100
                                     hero.get_life(100)
                                     print(f"The wind still blows where it wants to\nYou have {hero.life} {the_dish} now\nthanks to my cooking ablities")
-                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.total_life,)
+                                    return hero.sell_equipment(second, 0), hero.sell_equipment(first, 0), hero.total_life, hero.get_life(100)
                                 elif the_dish == "mana":
                                     hero.max_mana = hero.max_mana + 100
                                     print(f"The wind still blows where it wants to\nYou have {hero.max_mana} {the_dish} now\nthanks to my cooking ablities")
