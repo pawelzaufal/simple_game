@@ -184,14 +184,17 @@ class Settlement(Lands.Land):
                             first_ingredient = input("Choose the number of first ingredient -> ")
                             second_ingredient = input("Choose another -> ")
                             stones_price = 0
+
                             for ingredient in equipments_list:
                                 if first_ingredient == ingredient[0]:
                                     first = ingredient[1]
                                     stones_price += first.Price
-
-                                elif second_ingredient == ingredient[0]:
+                                    break
+                            for ingredient in equipments_list:
+                                if second_ingredient == ingredient[0]:
                                     second = ingredient[1]
                                     stones_price += second.Price
+                                    break
 
                             if stones_price < 100:
                                 witch_menu = ["gold", "life", "mana", "attack", "armor", "damage"]
