@@ -186,11 +186,11 @@ class Settlement(Lands.Land):
                             stones_price = 0
                             for ingredient in equipments_list:
                                 if first_ingredient == ingredient[0]:
-                                    stones_price += (ingredient[1]).Price
-                                    hero.sell_equipment((ingredient[1]), 0)
+                                    stones_price += equipment.Price
+                                    hero.sell_equipment(equipment, 0)
                                 elif second_ingredient == ingredient[0]:
-                                    stones_price += (ingredient[1]).Price
-                                    hero.sell_equipment((ingredient[1]), 0)
+                                    stones_price += equipment.Price
+                                    hero.sell_equipment(equipment, 0)
                             if stones_price < 100:
                                 witch_menu = ["gold", "life", "mana", "attack", "armor", "damage"]
                                 the_dish = random.choice(witch_menu)
